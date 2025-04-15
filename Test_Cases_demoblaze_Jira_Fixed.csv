@@ -1,0 +1,174 @@
+Summary,Description,Steps,Expected Result,Status,Comments
+Sign_up_01,Verify successful user registration with valid and unique credentials,"1. Navigate to the Demoblaze website.
+2. Click on the ""Sign up"" button.
+3. Enter a valid and unique username.
+4. Enter a strong password.
+5. Click on the ""Sign up"" button.
+6. Verify that a ""Sign up successful"" alert is displayed.
+7. Click ""OK"" on the alert.","User account is successfully created, and a success message is displayed",Pass,
+Sign_up_02,Verify registration with a username containing alphanumeric and underscores.,"1. Navigate to the ""Sign up"" page.
+2. Enter ""test_user_123"" as username.
+3. Enter a valid password.
+4. Click ""Sign up"".","User account is successfully created, and a success message is displayed.",Pass,
+Sign_up_03,Verify registration with a strong password.,"1. Navigate to the ""Sign up"" page.
+2. Enter a unique username.
+3. Enter ""SecureP@ss123!"" as password.
+4. Click ""Sign up"".","User account is successfully created, and a success message is displayed.",Pass,
+Sign_up_04,Verify case-insensitive login after case-sensitive registration.,"1. Navigate to the ""Log in"" page.
+2. Enter ""testuser"" as username.
+3. Enter the correct password for ""TestUser"".
+4. Click ""Log in"".",User is successfully logged in.,Fail,
+Sign_up_05,Verify registration fails with an empty username.,"1. Navigate to the ""Sign up"" page.
+2. Leave the username field blank.
+3. Enter a valid password.
+4. Click ""Sign up"".",Error message indicating the username is required.,Fail,UserName is Required
+Sign_up_06,Verify registration fails with an empty password.,"1. Navigate to the ""Sign up"" page.
+2. Enter a unique username.
+3. Leave the password field blank.
+4. Click ""Sign up"".",Error message indicating the password is required.,Fail,Password is Required
+Sign_up_07,Verify registration fails with a short username.,"1. Navigate to the ""Sign up"" page.
+2. Enter ""ab"" as username.
+3. Enter a valid password.
+4. Click ""Sign up"".",Error message indicating the minimum username length.,Pass,
+Sign_up_08,Verify registration fails with a long username.,"1. Navigate to the ""Sign up"" page.
+2. Enter a username longer than the allowed limit.
+3. Enter a valid password.
+4. Click ""Sign up"".",Error message indicating the maximum username length.,Pass,
+Sign_up_09,Verify registration fails with a short password.,"1. Navigate to the ""Sign up"" page.
+2. Enter a unique username.
+3. Enter ""123"" as password.
+4. Click ""Sign up"".",Error message indicating the minimum password length.,Fail,
+Sign_up_10,Verify registration fails with a long password.,"1. Navigate to the ""Sign up"" page.
+2. Enter a unique username.
+3. Enter a password longer than the allowed limit.
+4. Click ""Sign up"".",Error message indicating the maximum password length (if enforced).,Pass,
+Sign_up_11,Verify registration fails with invalid characters in the username.,"1. Navigate to the ""Sign up"" page.
+2. Enter ""test user"" as username.
+3. Enter a valid password.
+4. Click ""Sign up"".",Error message indicating invalid characters in the username.,Fail,
+Sign_up_12,Verify that the system prevents registration with an already existing username.,"1. Navigate to the Demoblaze website.
+2. Click on the ""Sign up"" button.
+3. Enter a username that has already been used for registration.
+4. Enter any valid password.
+5. Click on the ""Sign up"".","An error message is displayed, and the user is not registered",Pass,
+Untitled Test Case #1,,,,,
+Log_in_01,Verify successful user login with valid registered credentials,"1. Navigate to the Demoblaze website.
+2. Click on the ""Log in"" button.
+3. Enter a valid registered username.
+4. Enter the corresponding correct password.
+5. Click on the ""Log in"" button.",User is successfully logged in and can access their account,Pass,
+Log_in_02,Verify that the system prevents login with an incorrect password,"1. Navigate to the Demoblaze website.
+2. Click on the ""Log in"" button.
+3. Enter a valid registered username.
+4. Enter an incorrect password.
+5. Click on the ""Log in"" button.","An error message is displayed, and the user is not logged in",Pass,
+Log_in_03,Verify login with a username containing special characters.,"1. Navigate to the ""Log in"" page.
+2. Enter ""user-test"" as username.
+3. Enter the correct password.
+4. Click ""Log in"".",User is successfully logged in.,Pass,
+Log_in_04,Verify login after a period of inactivity (within session timeout).,"1. Log in successfully.
+2. Navigate to a different page.
+3. Wait for a period less than the expected session timeout.
+4. Navigate to another page.",User remains logged in.,Pass,
+Log_in_05,Verify specific error message for incorrect username.,"1. Navigate to the ""Log in"" page.
+2. Enter a non-existent username.
+3. Enter any password.
+4. Click ""Log in"".",Error message indicating incorrect username or password.,Pass,
+Log_in_06,Verify handling of multiple consecutive incorrect login attempts.,"1. Navigate to the ""Log in"" page.
+2. Enter incorrect credentials (username or password).
+3. Click ""Log in"".
+4. Repeat step 2 and 3 multiple times.","After a certain number of attempts, account lockout or CAPTCHA is enforced.",Fail,
+Log_in_07,Verify leading/trailing spaces in credentials are not accepted.,"1. Navigate to the ""Log in"" page.
+2. Enter "" validuser"" as username (with leading space) and correct password.
+3. Click ""Log in"".
+4. Repeat with trailing space in username and then for the password.","Login fails, and an error message is displayed.",Pass,
+Untitled Test Case #2,,,,,
+UserA_01,"Verify that after successful login, the user remains authenticated while navigating different pages.","1. Successfully log in to the website.
+2. Navigate to different pages on the website ( Home, Products, Contact).
+3. Verify that the user remains logged in ",The user remains authenticated and can navigate the website without being prompted to log in again,Pass,
+UserA_02,Verify that attempting to access a protected resource without logging in redirects the user to the login page or displays an access denied message.,"1. Log out of the website (if currently logged in)
+2. Attempt to directly access a page that requires authentication.
+3. Verify that the user is either redirected to the login page or an ""access denied"" message is displayed.",The user is prevented from accessing protected resources without proper authentication,Fail,
+UserA_03,Verify persistent login across sessions on the same browser/device.,"1. Log in successfully.
+2. Close the browser.
+3. Reopen the browser and navigate to a logged-in area.",User is still logged in.,Fail,
+UserA_04,Verify sensitive information requires authentication to view/modify.,"1. Log in successfully.
+2. Proceed to the checkout page (do not enter payment).
+3. Navigate to the homepage.
+4. Go back to the checkout page.",Payment details are not pre-filled or require explicit action to view/edit.,Pass,
+UserA_05,Verify secure handling of session IDs (observational).,"1. Log in successfully.
+2. Inspect session cookie/local storage in browser dev tools.
+3. Log out.
+4. Try to reuse the old session ID .","The old session ID is invalid, and access is denied.",Pass,
+UserA_06,Verify redirection to login after logout when accessing a protected page.,"1. Log in successfully.
+2. Navigate to a protected page
+3. Log out.
+4. Try to go back to the protected page using the browser's back button or direct URL.",User is redirected to the login page.,Fail,
+UserA_07,Verify session timeout after inactivity.,"1. Log in successfully.
+2. Remain inactive for longer than the expected session timeout.
+3. Attempt to perform an action requiring authentication.",User is logged out and prompted to log in again.,Fail,
+Untitled Test Case #3,,,,,
+Cart_01,Verify increasing item quantity in the cart.,1. Add an item to the cart.<br>2. Navigate to the cart page.<br>3. Increase the quantity of the item.<br>4. Verify the updated quantity and total price.,Quantity and total price are updated correctly.,Pass,
+Cart_02,Verify that a user can successfully add a product to the cart.,"Navigate to a product page.
+Click on the ""Add to cart"" button.
+Verify that a ""Product added"" alert is displayed.
+Click ""OK"" on the alert.
+Click on the ""Cart"" link",The selected product is successfully added to the cart and displayed with correct details.,Pass,
+Cart_03,Verify that a non-logged-in user is prompted to log in before proceeding to the checkout from the cart.,"Navigate to a product page and add an item to the cart.
+Click on the ""Cart"" link.
+Verify that the added item is in the cart.
+Click on the ""Place Order"" button.",Non-logged-in users are prevented from proceeding to order placement without logging in.,Fail,
+Cart_04,Verify decreasing item quantity in the cart (down to 1).,1. Add an item to the cart with quantity > 1.<br>2. Navigate to the cart page.<br>3. Decrease the quantity of the item down to 1.<br>4. Verify the updated quantity and total price.,"Quantity is decreased to 1, and the total price is updated correctly.",Pass,
+Cart_05,Verify removing an item from the cart.,"1. Add an item to the cart.<br>2. Navigate to the cart page.<br>3. Click the ""Remove"" button for the item.<br>4. Verify the item is no longer in the cart and the total price is updated.","Item is removed, and the cart total is updated.",Pass,
+Cart_06,Verify correct subtotal calculation.,"1. Add multiple items with different quantities to the cart.
+2. Navigate to the cart page.
+3. Manually calculate the subtotal.
+4. Compare with the displayed subtotal.",The displayed subtotal matches the calculated subtotal.,Pass,
+Cart_07,Verify cart persistence across different pages (same session).,"1. Add items to the cart on a product page.
+2. Navigate to the homepage.
+3. Navigate back to the cart page.",The added items are still present in the cart.,Pass,
+Cart_08,Verify setting quantity to zero removes the item.,"1. Add an item to the cart.
+2. Navigate to the cart page.
+3. Try to change the quantity to 0.
+4. Verify the cart content.",The item is removed from the cart.,Pass,
+Cart_09,Verify handling of non-numeric input in quantity field.,"1. Add an item to the cart.
+2. Navigate to the cart page.
+3. Enter ""abc"" in the quantity field.
+4. Verify the quantity field and cart behavior.","The system prevents invalid input or handles it appropriately (e.g., ignores, shows error, defaults to 1).",Fail / Blocked,
+Cart_10,Verify cart handling with a large number of items.,"1. Add a very large number of different items to the cart.
+2. Navigate to the cart page.
+3. Observe loading time and functionality.",The cart loads and functions correctly (though performance might be slower).,Pass,
+Cart_11,Verify cart total doesn't become negative.,"1. Add an item to the cart.
+2. Navigate to the cart page.
+3. Try to decrease the quantity below 1 (if UI allows).
+4. Verify the quantity and total.","The quantity does not go below 1, or the total does not become negative.",Pass,
+Untitled Test Case #4,,,,,
+Order_01,Verify order details in confirmation match checkout information.,"1. Log in.
+2. Add items to cart.
+3. Navigate to cart and click ""Place Order"".
+4. Fill in valid order details.
+5. Click ""Purchase"".
+6. Verify the confirmation page details.","Order details (name, address, items, total) on confirmation match entered details.",Pass,
+Order_02,Verify cart is emptied after successful order placement.,"1. Log in.
+2. Add items to cart.
+3. Navigate to cart and click ""Place Order"".
+4. Fill in valid order details.
+5. Click ""Purchase"".
+6. Navigate back to the cart page.",The cart is empty.,Pass,
+Order_03,Verify prevention of order placement with invalid data formats.,"1. Log in.
+2. Add items to cart.
+3. Navigate to cart and click ""Place Order"".
+4. Enter invalid data (e.g., non-numeric credit card).
+5. Click ""Purchase"".",Error messages are displayed for the invalid fields.,Fail,
+Order_04,Verify handling of very long input strings in address fields.,"1. Log in.
+2. Add items to cart.
+3. Navigate to cart and click ""Place Order"".
+4. Enter extremely long strings in name/address fields.
+5. Click ""Purchase"".",The system either truncates the input or displays an error message indicating maximum length.,Fail,
+Order_05,Verify order failure with an expired credit card.,"1. Log in.
+2. Add items to cart.
+3. Navigate to cart and click ""Place Order"".
+4. Enter details of an expired credit card.
+5. Click ""Purchase"".",An error message related to the invalid or expired card is displayed.,Fail,
+Order_06,"Verify ""Purchase"" button is disabled/non-functional when cart is empty.","1. Log in.
+2. Ensure the cart is empty",Error message are displayed due to cart empty,Fail,
